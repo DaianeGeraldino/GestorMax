@@ -40,7 +40,8 @@ body {
 }
 
 .btn-login:hover {
-    background-color: #1a1a1a;
+    color: white;
+    background-color: #000;
 }
 
 .forgot-link {
