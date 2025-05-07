@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Estoquista</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/styleHomeEstoquista.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <aside class="sidebar">
+    <div class="nav-button">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M3 13h4v-2H3v2zm0 6h4v-2H3v2zm0-12h4V5H3v2zm6 6h12v-2H9v2zm0 6h12v-2H9v2zM9 5v2h12V5H9z" />
+      </svg>
+      <span>Dashboard</span>
+    </div>
+    <div class="nav-button">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+        <path
+          d="M3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25zM21.41 6.34a1.25 1.25 0 0 0 0-1.77l-2-2a1.25 1.25 0 0 0-1.77 0l-1.83 1.83 3.75 3.75 1.85-1.81z" />
+      </svg>
+      <span>Estoque Geral</span>
+    </div>
+    <div class="nav-button">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M9 16.17 4.83 12 3.41 13.41 9 19 21 7 19.59 5.59z" />
+      </svg>
+      <span>Solicitações</span>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="header">
+      <div class="user-info">
+        <img src="https://th.bing.com/th/id/OIP.7NsqBOKqEkPmrr9rgvn3TwHaG0?cb=iwp1&rs=1&pid=ImgDetMain" alt="Usuário">
+        <div>
+          <strong>Usuário</strong><br>
+          <span style="font-size: 12px; color: #999;">Estoquista</span>
+        </div>
+        <span class="arrow-icon">&#8594;</span>
+      </div>
+    </div>
+
+    <div class="dashboard">
+      <canvas id="myChart" width="180" height="180"></canvas>
+      <div class="legend">
+        <span class="azul">Itens prontos</span>
+        <span class="vermelho">Itens em estoque</span>
+        <span class="amarelo">Itens que saíram do estoque</span>
+      </div>
+    </div>
+
+    <div class="cards">
+      <div class="card"></div>
+      <div class="card large"></div>
+      <div class="card large"></div>
+    </div>
+  </main>
+
+  <script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['Itens prontos', 'Itens em estoque', 'Itens que saíram do estoque'],
+        datasets: [{
+          data: [10, 30, 20],
+          backgroundColor: ['#3366ff', '#e74c3c', '#f1c40f'],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        responsive: false,
+        plugins: {
+          legend: { display: false }
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Solicitação</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/styleNovaSolicitacaoEstoquista.css">
+
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="nav-button">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M3 13h4v-2H3v2zm0 6h4v-2H3v2zm0-12h4V5H3v2zm6 6h12v-2H9v2zm0 6h12v-2H9v2zM9 5v2h12V5H9z" />
+            </svg>
+            <div>Dashboard</div>
+        </div>
+        <div class="nav-button">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                    d="M3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25zM21.41 6.34a1.25 1.25 0 0 0 0-1.77l-2-2a1.25 1.25 0 0 0-1.77 0l-1.83 1.83 3.75 3.75 1.85-1.81z" />
+            </svg>
+            <div>Estoque Geral</div>
+        </div>
+        <div class="nav-button active">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M9 16.17 4.83 12 3.41 13.41 9 19 21 7 19.59 5.59z" />
+            </svg>
+            <div>Solicitações</div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="header">
+            <div class="user-info">
+                <img src="https://th.bing.com/th/id/OIP.7NsqBOKqEkPmrr9rgvn3TwHaG0?cb=iwp1&rs=1&pid=ImgDetMain" alt="Usuário">
+                <div>
+                    <strong>Usuário</strong><br>
+                    <span style="font-size: 12px; color: #999;">Estoquista</span>
+                </div>
+                <span class="arrow-icon">&#8594;</span>
+            </div>
+        </div>
+
+        <h2>Nova solicitação</h2>
+        <div class="form-container">
+            <label for="produto">Produto</label>
+            <input type="text" id="produto" placeholder="Digite o nome do produto">
+
+            <label for="categoria">Categoria</label>
+            <input type="text" id="categoria" placeholder="Digite a categoria">
+
+            <label for="estante">Estante</label>
+            <input type="text" id="estante" placeholder="Digite a estante">
+
+            <label for="estoque">Estoque</label>
+            <textarea id="estoque" placeholder="Digite a quantidade em estoque"></textarea>
+
+            <button>Incluir</button>
+        </div>
+    </main>
+</body>
+
+</html>
