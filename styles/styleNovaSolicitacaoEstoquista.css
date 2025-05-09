@@ -1,76 +1,68 @@
-body {
+  body {
     margin: 0;
-    font-family: 'Inter', sans-serif;
-    display: flex;
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
   }
 
   .sidebar {
-    width: 70px;
-    background: #f6f0fa;
+    width: 100px;
+    background-color: #fef2f8;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
     padding-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    z-index: 1000;
   }
 
-  .nav-button {
-    width: 100%;
-    padding: 10px 0;
+  .sidebar .nav-link {
+    color: black;
     text-align: center;
-    cursor: pointer;
-    color: #333;
-    font-size: 12px;
+    padding: 20px 10px;
+    font-size: 0.85rem;
   }
 
-  .nav-button svg {
-    width: 20px;
-    height: 20px;
+  .sidebar .nav-link:hover,
+  .sidebar .nav-link.active {
+    background-color: #f19ed1;
+    border-radius: 15px;
+  }
+
+  .sidebar i {
+    display: block;
+    font-size: 1.5rem;
     margin-bottom: 5px;
   }
 
-  .nav-button:hover,
-  .nav-button.active {
-    background: #e0d1f5;
-    border-left: 4px solid #6c4acb;
-  }
-
-  .main-content {
-    flex: 1;
-    padding: 30px 50px;
-    background: #fff;
-    min-height: 100vh;
-  }
-
-  .header {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-bottom: 40px;
+  .content {
+    margin-left: 100px;
+    padding: 20px 30px;
   }
 
   .user-info {
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: end;
   }
 
   .user-info img {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
+    margin-right: 10px;
+  }
+
+  .user-info .bi-chevron-right {
+    margin-left: 5px;
   }
 
   .form-container {
     max-width: 400px;
-    margin: 0 auto;
+    margin: 40px auto;
     padding: 25px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-  }
-
-  h2 {
-    font-size: 28px;
-    margin-bottom: 30px;
+    border-radius: 15px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
 
   .form-container label {
@@ -79,13 +71,13 @@ body {
     margin-bottom: 6px;
   }
 
-  .form-container input, .form-container textarea {
+  .form-container input,
+  .form-container textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-family: 'Inter', sans-serif;
   }
 
   .form-container button {

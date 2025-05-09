@@ -1,190 +1,90 @@
 body {
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    display: flex;
-    background-color: #f9f9fb;
-  }
-  
-  .sidebar {
-    background-color: #f8f2fc;
-    width: 80px;
-    min-height: 100vh;
-    padding-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-  }
-  
-  .nav-button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: #333;
-    font-size: 12px;
-    text-align: center;
-    cursor: pointer;
-  }
-  
-  .nav-button svg {
-    width: 24px;
-    height: 24px;
-    margin-bottom: 5px;
-    color: #000;
-  }
-  
-  .main-content {
-    flex: 1;
-    padding: 20px;
-  }
-  
-  .header {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 20px;
-  }
-  
-  .user-info {
-    display: flex;
-    align-items: center;
-    background: white;
-    padding: 10px;
-    border-radius: 8px;
-    gap: 10px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  }
-  
-  .user-info img {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-  }
-  
-  .arrow-icon {
-    margin-left: auto;
-    font-size: 18px;
-    color: #333;
-  }
-  
-  .dashboard {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    margin-bottom: 40px;
-  }
-  
-  .legend {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    font-size: 14px;
-  }
-  
-  .legend span {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  
-  .azul::before {
-    content: " ";
-    width: 12px;
-    height: 12px;
-    background-color: #3366ff;
-    display: inline-block;
-    border-radius: 50%;
-  }
-  
-  .vermelho::before {
-    content: " ";
-    width: 12px;
-    height: 12px;
-    background-color: #e74c3c;
-    display: inline-block;
-    border-radius: 50%;
-  }
-  
-  .amarelo::before {
-    content: " ";
-    width: 12px;
-    height: 12px;
-    background-color: #f1c40f;
-    display: inline-block;
-    border-radius: 50%;
-  }
-  
-  .cards {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .card {
-    background: #e0e0e0;
-    border-radius: 10px;
-    height: 80px;
-  }
-  
-  .card.large {
-    height: 100px;
-  }
-  
-  .solicitacoes {
-    margin-top: 40px;
-  }
-  
-  .solicitacoes-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #eee;
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-  }
-  
-  .search-bar {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  
-  .search-bar input {
-    padding: 6px 10px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-  }
-  
-  .add-request {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: white;
-    border: 1px solid #ccc;
-    padding: 6px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .tabela-solicitacoes {
-    width: 100%;
-    border-collapse: collapse;
-    background: #e0e0e0;
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  
-  .tabela-solicitacoes th,
-  .tabela-solicitacoes td {
-    padding: 10px;
-    text-align: left;
-  }
-  
-  .tabela-solicitacoes thead {
-    background: #ddd;
-  }
-  
-  .tabela-solicitacoes input[type="checkbox"] {
-    transform: scale(1.2);
-  }
-  
+  margin: 0;
+  background-color: #f8f9fa;
+  font-family: Arial, sans-serif;
+}
+
+.sidebar {
+  width: 100px;
+  background-color: #fef2f8;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-top: 20px;
+  z-index: 1000;
+}
+
+.sidebar .nav-link {
+  color: black;
+  text-align: center;
+  padding: 20px 10px;
+  font-size: 0.85rem;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+  background-color: #f19ed1;
+  border-radius: 15px;
+}
+
+.sidebar i {
+  display: block;
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+
+.content {
+  margin-left: 100px;
+  padding: 20px 30px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.user-info img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-info .bi-chevron-right {
+  margin-left: 5px;
+}
+
+.solicitacoes-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 30px 0 20px;
+}
+
+.search-bar {
+  display: flex;
+  gap: 5px;
+}
+
+.search-bar input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 6px 10px;
+}
+
+.add-request {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+
+table th,
+table td {
+  vertical-align: middle !important;
+}

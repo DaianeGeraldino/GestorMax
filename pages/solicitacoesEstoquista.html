@@ -1,54 +1,58 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Solicitações</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <title>Solicitações - Estoquista</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <link rel="stylesheet" href="../styles/styleSolicitcoesEstoquista.css">
 </head>
-<body>
-  <aside class="sidebar">
-    <div class="nav-button">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M3 13h4v-2H3v2zm0 6h4v-2H3v2zm0-12h4V5H3v2zm6 6h12v-2H9v2zm0 6h12v-2H9v2zM9 5v2h12V5H9z"/></svg>
-      <span>Dashboard</span>
-    </div>
-    <div class="nav-button">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25zM21.41 6.34a1.25 1.25 0 0 0 0-1.77l-2-2a1.25 1.25 0 0 0-1.77 0l-1.83 1.83 3.75 3.75 1.85-1.81z"/></svg>
-      <span>Estoque Geral</span>
-    </div>
-    <div class="nav-button active">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17 4.83 12 3.41 13.41 9 19 21 7 19.59 5.59z"/></svg>
-      <span>Solicitações</span>
-    </div>
-  </aside>
 
-  <main class="main-content">
-    <div class="header">
+<body>
+
+  <div class="sidebar d-flex flex-column align-items-center">
+    <a href="dashboard.html" class="nav-link">
+      <i class="bi bi-bar-chart-fill"></i>Dashboard
+    </a>
+    <a href="estoque.html" class="nav-link">
+      <i class="bi bi-box-seam"></i>Estoque<br>Geral
+    </a>
+    <a href="solicitacoes.html" class="nav-link active">
+      <i class="bi bi-check2-circle"></i>Solicitações
+    </a>
+  </div>
+
+  <div class="content">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="fs-6 text-muted"></div> <!--SE TIRAR BUGA, DEIXA ASSIM-->
       <div class="user-info">
-        <img src="https://th.bing.com/th/id/OIP.7NsqBOKqEkPmrr9rgvn3TwHaG0?cb=iwp1&rs=1&pid=ImgDetMain" alt="Usuário">
-        <div>
+        <img src="https://th.bing.com/th/id/OIP.7NsqBOKqEkPmrr9rgvn3TwHaG0?cb=iwp1" alt="Usuário">
+        <div class="text-end">
           <strong>Usuário</strong><br>
-          <span style="font-size: 12px; color: #999;">Estoquista</span>
+          <small class="text-muted">Estoquista</small>
         </div>
-        <span class="arrow-icon">&#8594;</span>
+        <i class="bi bi-chevron-right"></i>
       </div>
     </div>
 
-    <section class="solicitacoes">
-      <h2>Solicitações</h2>
+    <section>
+      <h4 class="mt-4">Solicitações</h4>
+
       <div class="solicitacoes-top">
         <div class="search-bar">
           <input type="text" placeholder="Pesquisar...">
-          <button><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="20" height="20"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16a6.471 6.471 0 0 0 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C8.01 14 6 11.99 6 9.5S8.01 5 10.5 5 15 7.01 15 9.5 12.99 14 10.5 14z"/></svg></button>
+          <button class="btn btn-outline-secondary btn-sm">
+            <i class="bi bi-search"></i>
+          </button>
         </div>
         <button class="add-request">
-          Incluir nova solicitação:
-          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="20" height="20"><path d="M19 13H13v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+          Incluir nova <i class="bi bi-plus-lg"></i>
         </button>
       </div>
-      <table class="tabela-solicitacoes">
-        <thead>
+
+      <table class="table table-bordered table-hover bg-white">
+        <thead class="table-light">
           <tr>
             <th><input type="checkbox"></th>
             <th>Produto</th>
@@ -83,17 +87,11 @@
             <td>Z</td>
             <td>Z</td>
           </tr>
-          <tr>
-            <td><input type="checkbox"></td>
-            <td>Nome</td>
-            <td>X</td>
-            <td>Y</td>
-            <td>Z</td>
-            <td>Z</td>
-          </tr>
         </tbody>
       </table>
     </section>
-  </main>
+  </div>
+
 </body>
+
 </html>
