@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuários</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../styles/styleUsuarios.css">
 </head>
+
 <body>
-    
+
     <nav class="sidebar d-flex flex-column">
         <a href="../pages/homeAdm.html" class="nav-link">
             <i class="bi bi-bar-chart-fill"></i><br>Dashboard
@@ -23,26 +25,44 @@
         <a href="../pages/usuarios.html" class="nav-link">
             <i class="bi bi-people-fill"></i><br>Usuários
         </a>
-        
+
     </nav>
 
     <div class="espaco">
         <h1>Criação de Usuários</h1>
 
+
         <form class="form-container">
             <div class="form-group">
-            <label for="fname"> Nomee:</label>
-            <input type="text" name="fname" value="">
+                <label for="fname"> Nome:</label>
+                <input type="text" name="fname" value="">
 
-            <label for="femail"> Email:</label>
-            <input type="text" name="femail" value="">
+                <label for="femail"> Email:</label>
+                <input type="text" name="femail" value="">
 
-            <label for="femail2"> Repita o email:</label>
-            <input type="text" name="femail2" value="">
+                <label for="femail2"> Repita o email:</label>
+                <input type="text" name="femail2" value="">
+
+                <form action="/styles/styleUsuarios.css">
+                    <label for="funcao">Escolha sua função:</label>
+                    <select name="funcao" id="funcao">
+                        <option value="Estoquista">Estoquista</option>
+                        <option value="Administrador">Administrador</option>
+                </form>
+
+                <label for="senha">Senha:</label>
+                <input type="password" name="senha" value="">
+
+                <label for="senha2">Repita a senha:</label>
+                <input type="password" name="senha2" value="">
             </div>
+            <p></p>
             <button type="submit">Criar</button>
         </form>
+
+
     </div>
-    
+
 </body>
+
 </html>
