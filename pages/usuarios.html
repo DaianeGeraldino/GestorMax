@@ -33,7 +33,9 @@
 
 
         <form class="form-container">
+
             <div class="form-group">
+
                 <label for="fname"> Nome:</label>
                 <input type="text" name="fname" value="">
 
@@ -43,19 +45,24 @@
                 <label for="femail2"> Repita o email:</label>
                 <input type="text" name="femail2" value="">
 
-                <form action="/styles/styleUsuarios.css">
+                <form>
                     <label for="funcao">Escolha sua função:</label>
                     <select name="funcao" id="funcao">
                         <option value="Estoquista">Estoquista</option>
-                        <option value="Administrador">Administrador</option>
+                        <option value="Administrador">Administrador</option>           
+                    
                 </form>
 
+                <label for=""></label>
+                <input class="inputEscondido" type="text">
+                <p></p>
                 <label for="senha">Senha:</label>
                 <input type="password" name="senha" value="">
 
                 <label for="senha2">Repita a senha:</label>
                 <input type="password" name="senha2" value="">
-                
+
+
             </div>
             <p></p>
             <button type="submit">Criar</button>
