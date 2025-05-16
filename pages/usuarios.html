@@ -16,7 +16,7 @@
         <a href="../pages/homeAdm.html" class="nav-link">
             <i class="bi bi-bar-chart-fill"></i><br>Dashboard
         </a>
-        <a href="../pages/estoqueEstoquista.html" class="nav-link">
+        <a href="../pages/homeEstoquista.html" class="nav-link">
             <i class="bi bi-box-seam"></i><br>Estoque
         </a>
         <a href="../pages/novaSolicitacaoEstoquista.html" class="nav-link">
@@ -33,7 +33,9 @@
 
 
         <form class="form-container">
+
             <div class="form-group">
+
                 <label for="fname"> Nome:</label>
                 <input type="text" name="fname" value="">
 
@@ -43,19 +45,28 @@
                 <label for="femail2"> Repita o email:</label>
                 <input type="text" name="femail2" value="">
 
-                <form action="/styles/styleUsuarios.css">
+                
+                <form>
                     <label for="funcao">Escolha sua função:</label>
-                    <select name="funcao" id="funcao">
+                    <select class="" name="funcao" id="formFuncao">
                         <option value="Estoquista">Estoquista</option>
-                        <option value="Administrador">Administrador</option>
+                        <option value="Administrador">Administrador</option>           
+                    
                 </form>
+                
 
-                <label for="senha">Senha:</label>
+                <label for=""></label>
+                <input class="inputEscondido" type="text">
+
+                <p></p>
+
+                <label for="senha">Digite a senha:</label>
                 <input type="password" name="senha" value="">
 
                 <label for="senha2">Repita a senha:</label>
                 <input type="password" name="senha2" value="">
-                
+
+
             </div>
             <p></p>
             <button type="submit">Criar</button>
