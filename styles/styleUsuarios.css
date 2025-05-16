@@ -151,6 +151,10 @@ button {
     margin-bottom: 6px;
 }
 
+#formFuncao{
+    background-color: #e6a9ce;
+    border-radius: 15px;
+}
 .inputEscondido{
     display: none;
 }
