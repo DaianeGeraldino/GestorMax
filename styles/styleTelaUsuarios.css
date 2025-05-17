@@ -170,6 +170,7 @@ button {
     margin-top: 80px;
     align-items: center;
     margin-bottom: 16px;
+    padding-left: 80px; 
 }
 .header h1 {
     font-size: 2.25rem;
@@ -193,26 +194,34 @@ button {
     margin-bottom: 16px;
 }
 .table-container {
-    overflow-x: auto;    
+    overflow-x: auto;
+    margin: auto;
+    padding-left: 80px; 
 }
 
 table {
     width: 100%;
-    background-color: #f9fafb;
+    background-color: #cfcfcf;
     border-spacing: 0;
     border-collapse: collapse;
+    border-radius: 5px;
 }
 th, td {
     padding: 12px;
     text-align: left;
     width: 100%;
+    border-radius: 5px;
 }
 th {
-    background-color: #e5e7eb;
+    background-color: #cfcfcf;
     width: 100%;
+    text-align: center;    
+}
+td:hover{
+    background-color: #d5d6da;
 }
 tr:nth-child(even) {
-    background-color: #f3f4f6;
+    background-color: #cfcfcf;
 }
 .action-buttons button {
     margin-right: 8px;
