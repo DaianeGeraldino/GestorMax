@@ -16,7 +16,7 @@
       <div class="col-md-3 col-lg-2 d-md-block bg-dark sidebar">
         <div class="position-sticky pt-3 vh-100 d-flex flex-column">
           <div class="sidebar-header text-center mb-4 px-3">
-            <h1 class="h4 text-white">GESTORMAX</h1>
+            <h1 class="h4 text-white">GESTOR-MAX</h1>
           </div>
           
           <nav class="flex-grow-1">

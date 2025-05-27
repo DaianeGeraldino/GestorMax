@@ -29,7 +29,7 @@
   <section class="hero">
     <div class="container">
       <h1>Simplifique seu controle de estoque</h1>
-      <p>Com a GESTORMAX, você tem mais agilidade, segurança e eficiência no gerenciamento do seu negócio.</p>
+      <p>Com a GESTORMAX, você tem  muito mais agilidade, segurança e eficiência no gerenciamento do seu negócio.</p>
       <a href="#contato" class="btn btn-light mt-4">Fale Conosco</a>
     </div>
   </section>

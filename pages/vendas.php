@@ -139,7 +139,7 @@
                     <tfoot>
                       <tr>
                         <th colspan="2">Total</th>
-                        <th id="total-venda">R$ 0,00</th>
+                        <th id="total-venda">R$ 00,00</th>
                       </tr>
                     </tfoot>
                   </table>
