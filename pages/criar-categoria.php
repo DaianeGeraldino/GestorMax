@@ -39,7 +39,7 @@
                   Cadastrar produto
                 </a>
                 <li class="nav-item">
-                <a class="nav-link text-white" href="xxxxx.php">
+                <a class="nav-link text-white" href="criar-categoria.php">
                   <i class="bi bi-bar-chart-line me-2"></i>
                   Cadastrar categoria
                 </a>
