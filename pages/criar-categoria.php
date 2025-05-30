@@ -11,9 +11,27 @@
     <link rel="stylesheet" href="css/sidebar.css">
 
     <script>
-        function limparCampo(){
+
+        function limparCampo() {
             document.getElementById("nome").value = "";
-            // document.getElementById("categoria").selectedIndex = 0;
+        }
+
+        function cadastrarCategoria(event) {
+            if (event) event.preventDefault();
+            const modal = document.getElementById("modalSucesso");
+
+            // Define o conteúdo somente na hora do clique
+            modal.textContent = "Categoria cadastrada com sucesso!";
+
+            // Exibe o modal
+            modal.classList.add("ativo");
+
+            // Esconde após 3 segundos
+            setTimeout(() => {
+                modal.classList.remove("ativo");
+                modal.textContent = ""; // Limpa o texto depois que some
+            }, 3000);
+            document.getElementById("nome").value = ""
         }
     </script>
 
@@ -55,7 +73,7 @@
                                     Cadastrar categoria
                                 </a>
                             </li>
-                            
+
                             <li class="nav-item">
                                 <a class="nav-link text-white" href="vendas.php">
                                     <i class="bi bi-cart me-2"></i>
@@ -91,26 +109,27 @@
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
 
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">Cadastrar Nova Categoria</h1>
                 </div>
-                
+
                 <div id="mensagem-container"></div>
 
                 <div class="card shadow-sm mb-4">
                     <div class="card-header bg-light">
-                      <h2 class="h5 card-title mb-1">Informações da Categoria</h2>
-                      <p class="text-muted small mb-0">Preencha os dados da nova categoria</p>
+                        <h2 class="h5 card-title mb-1">Informações da Categoria</h2>
+                        <p class="text-muted small mb-0">Preencha os dados da nova categoria</p>
                     </div>
                     <div class="card-body">
-                      <form id="form-produto">
-                        <div class="row g-3">
-                          <div class="col-md-6">
-                            <label for="nome" class="form-label">Nome da Categoria</label>
-                            <input type="text" class="form-control" id="nome" required>
-                          </div>
-                          
-                          <!-- <div class="col-md-6">
+                        <form id="form-produto">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="nome" class="form-label">Nome da Categoria</label>
+                                    <input type="text" class="form-control" id="nome" required>
+                                </div>
+
+                                <!-- <div class="col-md-6">
                             <label for="categoria" class="form-label">Categoria</label>
                             <select class="form-select" id="categoria" required>
                               <option value="Escolha">Escolha a categoria</option>
@@ -121,16 +140,23 @@
                               <option value="Perfumaria">Perfumaria</option>
                             </select>
                           </div>                         -->
-                                   
-                          
-                        </div>
-                        
-                        <div class="d-flex justify-content-end mt-4 gap-2">
-                          <button type="button" id="btn-limpar" class="btn btn-outline-secondary" onclick="limparCampo()">Limpar</button>
-                          <button type="submit" class="btn btn-primary">Cadastrar Categoria</button>
-                        </div>
-                      </form>
+
+
+                            </div>
+
+                            <div class="d-flex justify-content-end mt-4 gap-2">
+                                <button type="button" id="btn-limpar" class="btn btn-outline-secondary"
+                                    onclick="limparCampo()">Limpar</button>
+                                <button type="submit" class="btn btn-primary" onclick="cadastrarCategoria(event)">Cadastrar
+                                    Categoria
+                                </button>                            
+                            </div>
+                            <div id="modalSucesso"></div>
+                        </form>
+
+
                     </div>
-                  </div>
-                
+
+                </div>
+
             </main>
