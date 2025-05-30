@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GESTORMAX | Gerenciamento de Estoque</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="index.css">
 </head>
 <body>
 
@@ -21,7 +21,7 @@
           <li class="nav-item"><a class="nav-link" href="#beneficios">Benefícios</a></li>
           <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
         </ul>
-        <a href="/login.php" class="btn btn-outline-primary">Login</a>
+        <a href="login.php" class="btn btn-outline-primary">Login</a>
       </div>
     </div>
   </nav>
