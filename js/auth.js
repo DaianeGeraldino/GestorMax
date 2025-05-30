@@ -1,18 +1,30 @@
-document.getElementById('loginForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault();
 
-    const usuario = document.getElementById('usuario').value;
-    const senha = document.getElementById('senha').value;
+      const usuario = document.getElementById('username').value.trim();
+      const senha = document.getElementById('password').value.trim();
+      const errorDiv = document.getElementById('login-error');
 
-    const usuarios = {
+      //TESTE
+      const usuarios = {
         'admin': 'admin',
         'teste': 'teste123'
-    };
+      };
 
-    if (usuarios[usuario] === senha) {
-        alert('Login bem-sucedido!');
-        window.location.href = 'pagina_de_destino.html';
-    } else {
-        alert('Usuário ou senha incorretos!');
-    }
-});
+      if (usuarios.hasOwnProperty(usuario)) {
+        if (usuarios[usuario] === senha) {
+          
+          window.location.href = 'dashboard.php';
+        } else {
+         
+          errorDiv.textContent = 'Senha incorreta!';
+          errorDiv.classList.remove('d-none');
+        }
+      } else {
+        
+        errorDiv.textContent = 'Usuário não encontrado!';
+        errorDiv.classList.remove('d-none');
+      }
+    });
+  </script>
