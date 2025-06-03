@@ -7,6 +7,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 </head>
+
 <body class="bg-light">
   <div class="container">
     <div class="row justify-content-center align-items-center min-vh-100">
@@ -36,13 +37,14 @@
               
               <div id="login-error" class="alert alert-danger d-none"></div>
               
-              <button type="button" class="btn btn-primary btn-lg w-100 py-2 mb-3" onclick="location.href='dashboard.php'>
-                <i class="bi bi-box-arrow-in-right me-2"></i>Entrar
+              <button type="button" class="btn btn-primary btn-lg w-100 py-2 mb-3" onclick="location.href='dashboard.php'">
+              <i class="bi bi-box-arrow-in-right me-2"></i>Entrar
               </button>
 
               <button type="button" class="btn btn-secondary btn-lg w-100 py-2 mb-3" onclick="location.href='index.php'">
-                <i class="bi bi-arrow-left me-2"></i>Voltar
+              <i class="bi bi-arrow-left me-2"></i>Voltar
               </button>
+
             </form>
           </div>
           <div class="card-footer text-center py-3 bg-light">
@@ -52,10 +54,38 @@
       </div>
     </div>
   </div>
-
   
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="auth.js"></script>
+  <script>
+  document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const usuario = document.getElementById('username').value.trim();
+    const senha = document.getElementById('password').value.trim();
+    const errorDiv = document.getElementById('login-error');
+
+    const usuarios = {
+      'admin': 'admin',
+      'teste': 'teste123'
+    };
+
+    if (usuarios.hasOwnProperty(usuario)) {
+      if (usuarios[usuario] === senha) {
+        alert('Login bem-sucedido! Redirecionando...');
+        window.location.href = 'dashboard.php';
+      } else {
+        errorDiv.textContent = 'Senha incorreta!';
+        errorDiv.classList.remove('d-none');
+      }
+    } else {
+      errorDiv.textContent = 'Usuário não encontrado!';
+      errorDiv.classList.remove('d-none');
+    }
+  });
+
+</script>
+  
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/auth.js"></script> -->
 
   
 </body>
