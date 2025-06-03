@@ -36,7 +36,7 @@
               
               <div id="login-error" class="alert alert-danger d-none"></div>
               
-              <button type="submit" class="btn btn-primary btn-lg w-100 py-2 mb-3" onclick="location.href='dashboard.php'>
+              <button type="button" class="btn btn-primary btn-lg w-100 py-2 mb-3" onclick="location.href='dashboard.php'>
                 <i class="bi bi-box-arrow-in-right me-2"></i>Entrar
               </button>
 
