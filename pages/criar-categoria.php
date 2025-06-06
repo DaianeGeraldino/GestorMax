@@ -20,16 +20,14 @@
             if (event) event.preventDefault();
             const modal = document.getElementById("modalSucesso");
 
-            // Define o conteúdo somente na hora do clique
             modal.textContent = "Categoria cadastrada com sucesso!";
 
-            // Exibe o modal
             modal.classList.add("ativo");
 
-            // Esconde após 3 segundos
+            
             setTimeout(() => {
                 modal.classList.remove("ativo");
-                modal.textContent = ""; // Limpa o texto depois que some
+                modal.textContent = "";
             }, 3000);
             document.getElementById("nome").value = ""
         }
@@ -128,22 +126,8 @@
                                     <label for="nome" class="form-label">Nome da Categoria</label>
                                     <input type="text" class="form-control" id="nome" required>
                                 </div>
-
-                                <!-- <div class="col-md-6">
-                            <label for="categoria" class="form-label">Categoria</label>
-                            <select class="form-select" id="categoria" required>
-                              <option value="Escolha">Escolha a categoria</option>
-                              <option value="PetShop">PetShop</option>
-                              <option value="HortiFruti">HortiFruti</option>
-                              <option value="Cabelo">Cabelo</option>
-                              <option value="Unhas">Unhas</option>
-                              <option value="Perfumaria">Perfumaria</option>
-                            </select>
-                          </div>                         -->
-
-
                             </div>
-
+                            
                             <div class="d-flex justify-content-end mt-4 gap-2">
                                 <button type="button" id="btn-limpar" class="btn btn-outline-secondary"
                                     onclick="limparCampo()">Limpar</button>
