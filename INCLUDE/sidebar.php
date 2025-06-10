@@ -1,6 +1,6 @@
 <?php
 
-$current = basename($_SERVER['PHP_SELF']);
+$current = basename($_SERVER['SCRIPT_NAME']);
 function isActive(string $page, string $current): string {
     return $page === $current ? 'active' : '';
 }
@@ -11,7 +11,7 @@ function isActive(string $page, string $current): string {
   <div class="position-sticky pt-3 vh-100 d-flex flex-column">
    
     <div class="sidebar-header text-center mb-4 px-3">
-      <h1 class="h4 text-white">GESTOR-MAX</h1>
+      <h1 class="h4 text-white">GESTORMAX</h1>
     </div>
 
     <nav class="flex-grow-1">
@@ -32,6 +32,12 @@ function isActive(string $page, string $current): string {
           <a class="nav-link text-white <?php echo isActive('produtos-cadastro.php', $current); ?>" href="produtos-cadastro.php">
             <i class="bi bi-plus-circle me-2"></i>
             Cadastrar produto
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white <?php echo isActive('criar-categoria.php', $current); ?>" href="dashboard.php">
+            <i class="bi bi-house-door me-2"></i>
+            Cadastrar categoria
           </a>
         </li>
         <li class="nav-item">
