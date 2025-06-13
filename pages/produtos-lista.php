@@ -21,9 +21,7 @@
       <?php
         include 'conexao.php';
 
-        $sql = "SELECT p.*, c.nome AS categoria_nome 
-                FROM produto p
-                LEFT JOIN categoria c ON p.categoria_id = c.id";
+        $sql = "SELECT * FROM `produtos`";
         $result = $conn->query($sql);
       ?>
 
@@ -111,6 +109,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Aqui você pode adicionar scripts JS para ações como exclusão com modal -->
 
 </body>
 </html>
