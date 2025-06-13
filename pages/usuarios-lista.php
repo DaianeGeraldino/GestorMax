@@ -10,15 +10,25 @@
   <link rel="stylesheet" href="css/sidebar.css">
 </head>
 <body>
+  
   <div class="container-fluid">
     <div class="row">
       <!-- Sidebar -->
-     <?php include '../INCLUDE/sidebar.php'; ?>
+      <?php include '../INCLUDE/sidebar.php'; ?>
+     
 
       <!-- Main content -->
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+      <?php
+        include 'conexao.php';
+
+        $sql = "SELECT * FROM usuarios";
+        $result = $conn->query($sql);
+        ?>
+        
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2">Lista de Usuários</h1>
+          
           <div class="btn-toolbar mb-2 mb-md-0">
             <a href="criar-usuario.php" class="btn btn-primary">
               <i class="bi bi-plus-circle me-1"></i> Novo Usuário
@@ -50,55 +60,53 @@
                   </tr>
                 </thead>
                 <tbody id="lista-usuarios">
-                  <tr>
-                    <td>João Silva</td>
-                    <td>joao.silva</td>
-                    <td>joao@empresa.com</td>
-                    <td><span class="badge bg-primary">Administrador</span></td>
-                    <td><span class="badge bg-success">Ativo</span></td>
-                    <td>
-                      <button class="btn btn-sm btn-outline-primary" title="Editar" onclick="location.href='editar-usuario.php'">
-                        <i class="bi bi-pencil" ></i>
-                      </button>
-                      <button class="btn btn-sm btn-outline-danger" title="Desativar">
-                        <i class="bi bi-person-x"></i>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Maria Souza</td>
-                    <td>maria.souza</td>
-                    <td>maria@empresa.com</td>
-                    <td><span class="badge bg-info text-dark">Vendedor</span></td>
-                    <td><span class="badge bg-success">Ativo</span></td>
-                    <td>
-                      <button class="btn btn-sm btn-outline-primary" title="Editar" onclick="location.href='editar-usuario.php'">
-                        <i class="bi bi-pencil"></i>
-                      </button>
-                      <button class="btn btn-sm btn-outline-danger" title="Desativar">
-                        <i class="bi bi-person-x"></i>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Carlos Oliveira</td>
-                    <td>carlos.oliveira</td>
-                    <td>carlos@empresa.com</td>
-                    <td><span class="badge bg-info text-dark">Vendedor</span></td>
-                    <td><span class="badge bg-secondary">Inativo</span></td>
-                    <td>
-                      <button class="btn btn-sm btn-outline-primary" title="Editar" onclick="location.href='editar-usuario.php'">
-                        <i class="bi bi-pencil"></i>
-                      </button>
-                      <button class="btn btn-sm btn-outline-success" title="Ativar">
-                        <i class="bi bi-person-check"></i>
-                      </button>
-                    </td>
-                  </tr>
+                <?php 
+                  if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                      echo "<tr>";
+                      echo "<td>".htmlspecialchars($row['name'])."</td>";
+                      echo "<td>".htmlspecialchars($row['nickname'])."</td>";
+                      echo "<td>".htmlspecialchars($row['email'])."</td>";
+                      echo "<td>";
+                      if ($row['typePerfil'] == 'admin') {
+                        echo "<span class='badge bg-primary'>Administrador</span>";
+                      } else {
+                        echo "<span class='badge bg-info text-dark'>Vendedor</span>";
+                      }
+                      echo "</td>";
+
+                      echo "<td>";
+                      if (strtolower($row['status']) == 'ativo') {
+                        echo "<span class='badge bg-success'>Ativo</span>";
+                      } else {
+                        echo "<span class='badge bg-secondary'>Inativo</span>";
+                      }
+                      echo "</td>";
+
+                      echo "<td>
+                        <button class='btn btn-sm btn-outline-primary' title='Editar' onclick=\"location.href='editar-usuario.php?id=".$row['idname']."'\"> 
+                          <i class='bi bi-pencil'></i> 
+                        </button>";
+                      if (strtolower($row['status']) == 'ativo') {
+                        echo "<button class='btn btn-sm btn-outline-danger' title='Desativar'> 
+                          <i class='bi bi-person-x'></i> 
+                        </button>";
+                      } else {
+                        echo "<button class='btn btn-sm btn-outline-success' title='Ativar'> 
+                          <i class='bi bi-person-check'></i> 
+                        </button>";
+                      }
+                      echo "</td>";
+                      echo "</tr>";
+                    }
+                  } else {
+                    echo "<tr><td colspan='6' class='text-center'>Nenhum usuário encontrado.</td></tr>";
+                  }
+                ?>
                 </tbody>
               </table>
             </div>
-            
+
             <nav aria-label="Navegação de páginas">
               <ul class="pagination justify-content-center">
                 <li class="page-item disabled">
