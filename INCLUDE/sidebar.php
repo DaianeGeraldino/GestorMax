@@ -35,7 +35,7 @@ function isActive(string $page, string $current): string {
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white <?php echo isActive('criar-categoria.php', $current); ?>" href="dashboard.php">
+          <a class="nav-link text-white <?php echo isActive('criar-categoria.php', $current); ?>" href="criar-categoria.php">
             <i class="bi bi-house-door me-2"></i>
             Cadastrar categoria
           </a>
