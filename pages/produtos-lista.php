@@ -71,7 +71,7 @@
                       echo "<td>R$ " . number_format($row['custo'], 2, ',', '.') . "</td>";
                       echo "<td>R$ " . number_format($row['valor_venda'], 2, ',', '.') . "</td>";
                       echo "<td>
-                              <a href='editar-produto.php?id=" . $row['id'] . "' class='btn btn-sm btn-outline-primary' title='Editar'>
+                              <a href='produtos-editar.php?id=" . $row['id'] . "' class='btn btn-sm btn-outline-primary' title='Editar'>
                                 <i class='bi bi-pencil'></i>
                               </a>
                               <button class='btn btn-sm btn-outline-danger' data-id='" . $row['id'] . "' title='Excluir'>
