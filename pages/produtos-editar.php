@@ -11,7 +11,7 @@ $produto = null;
 
 // Buscar os dados do produto se existir o ID
 if ($produto_id > 0) {
-    $sql_produto = "SELECT * FROM produtos WHERE produto_id = $produto_id";
+    $sql_produto = "SELECT * FROM produtos WHERE id = $produto_id";
     $resultado = $conn->query($sql_produto);
     
     if ($resultado->num_rows === 0) {
@@ -59,9 +59,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $produto_id > 0) {
                               quantidade_minima = $quantidade_minima, 
                               custo = $custo, 
                               valor_venda = $valor_venda
-                              WHERE produto_id = $produto_id";
+                              WHERE id = $produto_id";
             
-            if ($conn->query($sql_atualizar) {
+            if ($conn->query($sql_atualizar)) {
                 $mensagem = 'Produto atualizado com sucesso!';
                 $classe_mensagem = 'alert-success';
                 
@@ -170,7 +170,7 @@ if ($resultado->num_rows > 0) {
                 <span>Margem de Lucro:</span>
                 <span id="margem-lucro-valor" class="fw-bold">
                   <?php 
-                    $margem = (($produto['valor_venda'] - $produto['custo']) / $produto['custo'] * 100;
+                    $margem = (($produto['valor_venda'] - $produto['custo']) / $produto['custo'] * 100);
                     echo number_format($margem, 2) . '%';
                   ?>
                 </span>
