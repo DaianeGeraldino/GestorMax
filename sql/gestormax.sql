@@ -1,152 +1,94 @@
--- phpMyAdmin SQL Dump
--- version 5.1.3
--- https://www.phpmyadmin.net/
---
--- Host: localhost
--- Tempo de geração: 13-Jun-2025 às 23:53
--- Versão do servidor: 5.7.36
--- versão do PHP: 8.1.3
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Banco de dados: `gestormax`
---
+-- Banco de dados: gestormax
+CREATE DATABASE IF NOT EXISTS gestormax;
+USE gestormax;
 
 -- --------------------------------------------------------
-
---
--- Estrutura da tabela `categorias`
---
-
-CREATE TABLE `categorias` (
-  `categoria_id` int(11) NOT NULL,
-  `nome` varchar(100) NOT NULL
+-- Tabela: categorias
+CREATE TABLE IF NOT EXISTS categorias (
+  categoria_id INT(11) NOT NULL AUTO_INCREMENT,
+  nome VARCHAR(100) NOT NULL,
+  PRIMARY KEY (categoria_id),
+  UNIQUE KEY nome (nome)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `categorias`
---
-
-INSERT INTO `categorias` (`categoria_id`, `nome`) VALUES
-(2, 'hortifruti');
 
 -- --------------------------------------------------------
-
---
--- Estrutura da tabela `produtos`
---
-
-CREATE TABLE `produtos` (
-  `id` int(11) NOT NULL,
-  `nome` varchar(100) NOT NULL,
-  `categoria_id` int(11) DEFAULT NULL,
-  `quantidade_inicial` int(11) NOT NULL,
-  `quantidade_minima` int(11) NOT NULL,
-  `custo` decimal(10,2) NOT NULL,
-  `valor_venda` decimal(10,2) NOT NULL
+-- Tabela: produtos
+CREATE TABLE IF NOT EXISTS produtos (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  nome VARCHAR(100) NOT NULL,
+  categoria_id INT(11) DEFAULT NULL,
+  quantidade_inicial INT(11) NOT NULL,
+  quantidade_minima INT(11) NOT NULL,
+  custo DECIMAL(10,2) NOT NULL,
+  valor_venda DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY (id),
+  KEY categoria_id (categoria_id),
+  FOREIGN KEY (categoria_id) REFERENCES categorias (categoria_id)
+    ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `produtos`
---
-
-INSERT INTO `produtos` (`id`, `nome`, `categoria_id`, `quantidade_inicial`, `quantidade_minima`, `custo`, `valor_venda`) VALUES
-(1, 'Shampoo Anticaspa', 2, 100, 10, '8.50', '19.90');
 
 -- --------------------------------------------------------
-
---
--- Estrutura da tabela `usuarios`
---
-
-CREATE TABLE `usuarios` (
-  `idname` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `nickname` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `typePerfil` varchar(255) NOT NULL,
-  `status` varchar(255) NOT NULL,
-  `senha` varchar(255) NOT NULL
+-- Tabela: usuarios
+CREATE TABLE IF NOT EXISTS usuarios (
+  idname INT(11) NOT NULL AUTO_INCREMENT,
+  name VARCHAR(255) NOT NULL,
+  nickname VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  typePerfil VARCHAR(255) NOT NULL,
+  status VARCHAR(255) NOT NULL,
+  senha VARCHAR(255) NOT NULL,
+  PRIMARY KEY (idname),
+  UNIQUE KEY email (email),
+  UNIQUE KEY nickname (nickname)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Extraindo dados da tabela `usuarios`
---
+-- --------------------------------------------------------
+-- Tabela: entradas (entrada de produtos no estoque)
+CREATE TABLE IF NOT EXISTS entradas (
+  entrada_id INT NOT NULL AUTO_INCREMENT,
+  produto_id INT NOT NULL,
+  usuario_id INT NOT NULL,
+  data_entrada DATE NOT NULL,
+  quantidade INT NOT NULL,
+  PRIMARY KEY (entrada_id),
+  FOREIGN KEY (produto_id) REFERENCES produtos (id)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (usuario_id) REFERENCES usuarios (idname)
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `usuarios` (`idname`, `name`, `nickname`, `email`, `typePerfil`, `status`, `senha`) VALUES
-(3, 'Gabriel', 'gabriel.buffon', 'ga@gmail.com', 'admin', 'ativo', '$2y$10$S6FoCLB.pLsrlRTYfzh0du8ra3x3R16wHi1CzyareMeL.xeIKHNZC'),
-(6, 'fvff', 'teste', 'daiane@gnansf.com', 'admin', 'ativo', '$2y$10$bsyT5WYqZMo3IxvaK2BYUuj4/zSIscXp1Y//UwZ1vqY8P.xNqSk0y'),
-(7, 'a', 'a', 'a@gmail.com', 'admin', 'ativo', '$2y$10$y843AHPSy0Dgmyn.EIS6wusFj0qoeySX7xtAfSc8iWW2g7TSzg31W'),
-(8, 'prof', 'profff', 'prof@gmail.com', 'admin', 'ativo', '$2y$10$QjajRDQd23ZC04BczD8OZODeRP9X/.bSnDY0gbgeRUCHf33GO9pyK');
+-- --------------------------------------------------------
+-- Tabela: vendas
+CREATE TABLE IF NOT EXISTS vendas (
+  venda_id INT NOT NULL AUTO_INCREMENT,
+  data_venda DATE NOT NULL,
+  usuario_id INT NOT NULL,
+  PRIMARY KEY (venda_id),
+  FOREIGN KEY (usuario_id) REFERENCES usuarios (idname)
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Índices para tabelas despejadas
---
+-- --------------------------------------------------------
+-- Tabela: itens_venda (itens vendidos por venda)
+CREATE TABLE IF NOT EXISTS itens_venda (
+  item_id INT NOT NULL AUTO_INCREMENT,
+  venda_id INT NOT NULL,
+  produto_id INT NOT NULL,
+  quantidade INT NOT NULL,
+  valor_unitario DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY (item_id),
+  FOREIGN KEY (venda_id) REFERENCES vendas (venda_id)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (produto_id) REFERENCES produtos (id)
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Índices para tabela `categorias`
---
-ALTER TABLE `categorias`
-  ADD PRIMARY KEY (`categoria_id`),
-  ADD UNIQUE KEY `nome` (`nome`);
+-- --------------------------------------------------------
+-- Inserção de exemplo (opcional)
+INSERT INTO categorias (nome) VALUES ('hortifruti');
 
---
--- Índices para tabela `produtos`
---
-ALTER TABLE `produtos`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `categoria_id` (`categoria_id`);
+INSERT INTO produtos (nome, categoria_id, quantidade_inicial, quantidade_minima, custo, valor_venda)
+VALUES ('Shampoo Anticaspa', 1, 100, 10, 8.50, 19.90);
 
---
--- Índices para tabela `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`idname`),
-  ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `nickname` (`nickname`);
-
---
--- AUTO_INCREMENT de tabelas despejadas
---
-
---
--- AUTO_INCREMENT de tabela `categorias`
---
-ALTER TABLE `categorias`
-  MODIFY `categoria_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de tabela `produtos`
---
-ALTER TABLE `produtos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de tabela `usuarios`
---
-ALTER TABLE `usuarios`
-  MODIFY `idname` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- Restrições para despejos de tabelas
---
-
---
--- Limitadores para a tabela `produtos`
---
-ALTER TABLE `produtos`
-  ADD CONSTRAINT `produtos_ibfk_1` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`categoria_id`) ON DELETE SET NULL ON UPDATE CASCADE;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+INSERT INTO usuarios (name, nickname, email, typePerfil, status, senha)
+VALUES ('Gabriel', 'gabriel.buffon', 'ga@gmail.com', 'admin', 'ativo', 'senha123');
