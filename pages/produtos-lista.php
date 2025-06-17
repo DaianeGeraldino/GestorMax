@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -22,7 +24,10 @@
         include 'conexao.php';
 
         $sql = "SELECT * FROM `produtos`";
+        $sql = "SELECT p.*, c.nome AS cat_nome FROM produtos p, categorias c WHERE p.categoria_id = c.categoria_id";
         $result = $conn->query($sql);
+
+
       ?>
 
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -60,7 +65,7 @@
                     while ($row = $result->fetch_assoc()) {
                       echo "<tr>";
                       echo "<td>" . htmlspecialchars($row['nome']) . "</td>";
-                      echo "<td>" . htmlspecialchars($row['categoria_nome'] ?? 'Não definida') . "</td>";
+                      echo "<td>" . htmlspecialchars($row['cat_nome'] ?? 'Sem categoria') . "</td>";
                       echo "<td>" . intval($row['quantidade_inicial']) . "</td>";
                       echo "<td>" . intval($row['quantidade_minima']) . "</td>";
                       echo "<td>R$ " . number_format($row['custo'], 2, ',', '.') . "</td>";
