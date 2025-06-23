@@ -2,7 +2,7 @@
 include 'conexao.php';
 session_start();
 
-// 1. Tratamento da exclusão via POST
+// Exclusão via POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['acao'] === 'excluir_produto') {
     $idExcluir = isset($_POST['id']) ? intval($_POST['id']) : 0;
 
@@ -18,12 +18,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
         $_SESSION['msg'] = "ID inválido para exclusão.";
     }
 
-    // Redireciona para evitar reenvio do formulário
     header("Location: " . $_SERVER['PHP_SELF']);
     exit;
 }
 
-// Consulta os produtos
 $sql = "SELECT p.*, c.nome AS cat_nome FROM produtos p LEFT JOIN categorias c ON p.categoria_id = c.categoria_id";
 $result = $conn->query($sql);
 ?>
@@ -42,10 +40,8 @@ $result = $conn->query($sql);
 <body>
 <div class="container-fluid">
   <div class="row">
-    <!-- Sidebar -->
     <?php include '../INCLUDE/sidebar.php'; ?>
 
-    <!-- Conteúdo principal -->
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
 
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -56,7 +52,6 @@ $result = $conn->query($sql);
       </div>
 
       <?php
-      // Mensagem de feedback
       if (isset($_SESSION['msg'])) {
           echo '<div class="alert alert-success">' . htmlspecialchars($_SESSION['msg']) . '</div>';
           unset($_SESSION['msg']);
@@ -73,7 +68,7 @@ $result = $conn->query($sql);
           </div>
 
           <div class="table-responsive">
-            <table class="table table-hover">
+            <table class="table table-hover" id="tabela-produtos">
               <thead class="table-light">
                 <tr>
                   <th>Nome</th>
@@ -120,7 +115,6 @@ $result = $conn->query($sql);
   </div>
 </div>
 
-<!-- Modal de confirmação -->
 <div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -139,7 +133,6 @@ $result = $conn->query($sql);
   </div>
 </div>
 
-<!-- Formulário oculto para exclusão -->
 <form id="form-excluir-produto" method="POST" style="display:none;">
   <input type="hidden" name="acao" value="excluir_produto" />
   <input type="hidden" name="id" id="idExcluir" value="" />
@@ -148,10 +141,10 @@ $result = $conn->query($sql);
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
+  // Modal exclusão
   const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
   let produtoIdParaExcluir = null;
 
-  // Abrir modal ao clicar no botão excluir
   document.querySelectorAll('.btn-excluir').forEach(button => {
     button.addEventListener('click', () => {
       produtoIdParaExcluir = button.getAttribute('data-id');
@@ -159,12 +152,30 @@ $result = $conn->query($sql);
     });
   });
 
-  // Confirmar exclusão e enviar formulário
   document.getElementById('btn-confirm-delete').addEventListener('click', () => {
     if(produtoIdParaExcluir) {
       document.getElementById('idExcluir').value = produtoIdParaExcluir;
       document.getElementById('form-excluir-produto').submit();
     }
+  });
+
+  // Busca em tempo real
+  document.getElementById('busca-produto').addEventListener('input', function() {
+    const busca = this.value.toLowerCase();
+    const linhas = document.querySelectorAll('#tabela-produtos tbody tr');
+    linhas.forEach(linha => {
+      const textoLinha = linha.textContent.toLowerCase();
+      if (textoLinha.indexOf(busca) > -1) {
+        linha.style.display = '';
+      } else {
+        linha.style.display = 'none';
+      }
+    });
+  });
+
+  // Opcional: botao busca só faz foco no input (pq a busca é em tempo real)
+  document.getElementById('btn-buscar-produto').addEventListener('click', () => {
+    document.getElementById('busca-produto').focus();
   });
 </script>
 
