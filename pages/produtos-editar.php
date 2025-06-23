@@ -177,7 +177,7 @@ if ($resultado->num_rows > 0) {
               </div>
               
               <div class="d-flex justify-content-end mt-4 gap-2">
-                <a href="lista_produtos.php" class="btn btn-outline-secondary">Cancelar</a>
+                <a href="produtos-lista.php" class="btn btn-outline-secondary">Cancelar</a>
                 <button type="submit" class="btn btn-primary">Atualizar Produto</button>
               </div>
             </form>
