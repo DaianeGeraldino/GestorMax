@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
 
       $sql = "INSERT INTO usuarios (name, nickname, email, typePerfil, senha, status) 
-              VALUES ('$name', '$nickname', '$email', '$typePerfil', '$senha_hash', 'ativo')";
+              VALUES ('$name', '$nickname', '$email', '$typePerfil', '$senha_hash', '1')";
 
         if ($conn->query($sql) === TRUE) {
             $mensagem = "<div class='alert alert-success'>Usuário cadastrado com sucesso!</div>";
@@ -92,8 +92,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="col-md-6">
                   <label for="perfil" class="form-label">Perfil</label>
                   <select class="form-select" id="perfil" name="perfil" required>
-                    <option value="admin">Administrador</option>
-                    <option value="vendedor">Vendedor</option>
+                    <option value="1">Administrador</option>
+                    <option value="0">Vendedor</option>
                   </select>
                 </div>
 
