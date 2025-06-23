@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <i class="bi bi-box-arrow-in-right me-2"></i>Entrar
               </button>
 
-              <a href="index.php" class="btn btn-secondary btn-lg w-100 py-2">
+              <a href="../index.php" class="btn btn-secondary btn-lg w-100 py-2">
                 <i class="bi bi-arrow-left me-2"></i>Voltar
               </a>
             </form>
