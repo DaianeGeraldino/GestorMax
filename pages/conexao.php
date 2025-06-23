@@ -1,7 +1,10 @@
 <?php
+
+session_start();
+
 $host = 'localhost';
 $usuario = 'root';
-$senha = 'usbw';
+$senha = 'root';
 $banco = 'gestorMax';
 
 $conn = new mysqli($host, $usuario, $senha, $banco);
