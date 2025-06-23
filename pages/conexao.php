@@ -4,7 +4,7 @@ session_start();
 
 $host = 'localhost';
 $usuario = 'root';
-$senha = 'root';
+$senha = 'serra';
 $banco = 'gestorMax';
 
 $conn = new mysqli($host, $usuario, $senha, $banco);
