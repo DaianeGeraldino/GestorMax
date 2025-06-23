@@ -1,18 +1,45 @@
+<?php
+include 'conexao.php';
+session_start();
 
+// 1. Tratamento da exclusão via POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['acao'] === 'excluir_produto') {
+    $idExcluir = isset($_POST['id']) ? intval($_POST['id']) : 0;
+
+    if ($idExcluir > 0) {
+        $stmt = $conn->prepare("DELETE FROM produtos WHERE id = ?");
+        $stmt->bind_param("i", $idExcluir);
+        if ($stmt->execute()) {
+            $_SESSION['msg'] = "Produto excluído com sucesso!";
+        } else {
+            $_SESSION['msg'] = "Erro ao excluir o produto.";
+        }
+    } else {
+        $_SESSION['msg'] = "ID inválido para exclusão.";
+    }
+
+    // Redireciona para evitar reenvio do formulário
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit;
+}
+
+// Consulta os produtos
+$sql = "SELECT p.*, c.nome AS cat_nome FROM produtos p LEFT JOIN categorias c ON p.categoria_id = c.categoria_id";
+$result = $conn->query($sql);
+?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>GESTORMAX - Lista de Produtos</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="../styles/produtos.css">
-  <link rel="stylesheet" href="../styles//sidebar.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="../styles/produtos.css" />
+  <link rel="stylesheet" href="../styles/sidebar.css" />
 </head>
 <body>
-
 <div class="container-fluid">
   <div class="row">
     <!-- Sidebar -->
@@ -20,15 +47,6 @@
 
     <!-- Conteúdo principal -->
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
-      <?php
-        include 'conexao.php';
-
-        $sql = "SELECT * FROM `produtos`";
-        $sql = "SELECT p.*, c.nome AS cat_nome FROM produtos p, categorias c WHERE p.categoria_id = c.categoria_id";
-        $result = $conn->query($sql);
-
-
-      ?>
 
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Lista de Produtos</h1>
@@ -37,10 +55,18 @@
         </a>
       </div>
 
+      <?php
+      // Mensagem de feedback
+      if (isset($_SESSION['msg'])) {
+          echo '<div class="alert alert-success">' . htmlspecialchars($_SESSION['msg']) . '</div>';
+          unset($_SESSION['msg']);
+      }
+      ?>
+
       <div class="card shadow-sm">
         <div class="card-body">
           <div class="input-group mb-3">
-            <input type="text" id="busca-produto" class="form-control" placeholder="Buscar produto...">
+            <input type="text" id="busca-produto" class="form-control" placeholder="Buscar produto..." />
             <button class="btn btn-outline-secondary" type="button" id="btn-buscar-produto">
               <i class="bi bi-search"></i>
             </button>
@@ -61,28 +87,28 @@
               </thead>
               <tbody>
                 <?php 
-                  if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                      echo "<tr>";
-                      echo "<td>" . htmlspecialchars($row['nome']) . "</td>";
-                      echo "<td>" . htmlspecialchars($row['cat_nome'] ?? 'Sem categoria') . "</td>";
-                      echo "<td>" . intval($row['quantidade_inicial']) . "</td>";
-                      echo "<td>" . intval($row['quantidade_minima']) . "</td>";
-                      echo "<td>R$ " . number_format($row['custo'], 2, ',', '.') . "</td>";
-                      echo "<td>R$ " . number_format($row['valor_venda'], 2, ',', '.') . "</td>";
-                      echo "<td>
-                              <a href='produtos-editar.php?id=" . $row['id'] . "' class='btn btn-sm btn-outline-primary' title='Editar'>
-                                <i class='bi bi-pencil'></i>
-                              </a>
-                              <button class='btn btn-sm btn-outline-danger' data-id='" . $row['id'] . "' title='Excluir'>
-                                <i class='bi bi-trash'></i>
-                              </button>
-                            </td>";
-                      echo "</tr>";
-                    }
-                  } else {
-                    echo "<tr><td colspan='7' class='text-center'>Nenhum produto encontrado.</td></tr>";
+                if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>" . htmlspecialchars($row['nome']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['cat_nome'] ?? 'Sem categoria') . "</td>";
+                    echo "<td>" . intval($row['quantidade_inicial']) . "</td>";
+                    echo "<td>" . intval($row['quantidade_minima']) . "</td>";
+                    echo "<td>R$ " . number_format($row['custo'], 2, ',', '.') . "</td>";
+                    echo "<td>R$ " . number_format($row['valor_venda'], 2, ',', '.') . "</td>";
+                    echo "<td>
+                            <a href='produtos-editar.php?id=" . $row['id'] . "' class='btn btn-sm btn-outline-primary' title='Editar'>
+                              <i class='bi bi-pencil'></i>
+                            </a>
+                            <button class='btn btn-sm btn-outline-danger btn-excluir' data-id='" . $row['id'] . "' title='Excluir'>
+                              <i class='bi bi-trash'></i>
+                            </button>
+                          </td>";
+                    echo "</tr>";
                   }
+                } else {
+                  echo "<tr><td colspan='7' class='text-center'>Nenhum produto encontrado.</td></tr>";
+                }
                 ?>
               </tbody>
             </table>
@@ -94,13 +120,13 @@
   </div>
 </div>
 
-<!-- Modal de confirmação (opcional) -->
+<!-- Modal de confirmação -->
 <div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Confirmar Ação</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
       </div>
       <div class="modal-body">
         Tem certeza que deseja excluir este produto?
@@ -113,8 +139,34 @@
   </div>
 </div>
 
+<!-- Formulário oculto para exclusão -->
+<form id="form-excluir-produto" method="POST" style="display:none;">
+  <input type="hidden" name="acao" value="excluir_produto" />
+  <input type="hidden" name="id" id="idExcluir" value="" />
+</form>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Aqui você pode adicionar scripts JS para ações como exclusão com modal -->
+
+<script>
+  const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+  let produtoIdParaExcluir = null;
+
+  // Abrir modal ao clicar no botão excluir
+  document.querySelectorAll('.btn-excluir').forEach(button => {
+    button.addEventListener('click', () => {
+      produtoIdParaExcluir = button.getAttribute('data-id');
+      confirmModal.show();
+    });
+  });
+
+  // Confirmar exclusão e enviar formulário
+  document.getElementById('btn-confirm-delete').addEventListener('click', () => {
+    if(produtoIdParaExcluir) {
+      document.getElementById('idExcluir').value = produtoIdParaExcluir;
+      document.getElementById('form-excluir-produto').submit();
+    }
+  });
+</script>
 
 </body>
 </html>
