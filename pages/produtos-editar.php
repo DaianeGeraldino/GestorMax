@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $produto_id > 0) {
                 $classe_mensagem = 'alert-success';
                 
                 // Atualizar os dados do produto após atualização bem-sucedida
-                $sql_produto = "SELECT * FROM produtos WHERE produto_id = $produto_id";
+                $sql_produto = "SELECT * FROM produtos WHERE id = $produto_id";
                 $resultado = $conn->query($sql_produto);
                 $produto = $resultado->fetch_assoc();
             } else {
