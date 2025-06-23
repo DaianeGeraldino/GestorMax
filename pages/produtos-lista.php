@@ -22,7 +22,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
     exit;
 }
 
-$sql = "SELECT p.*, c.nome AS cat_nome FROM produtos p LEFT JOIN categorias c ON p.categoria_id = c.categoria_id";
+// Configuração da paginação
+$itemsPerPage = 7; // Itens por página
+$page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1; // Página atual
+$offset = ($page - 1) * $itemsPerPage; // Cálculo do offset
+
+// Consulta para contar o total de produtos
+$sqlCount = "SELECT COUNT(*) AS total FROM produtos";
+$resultCount = $conn->query($sqlCount);
+$totalProdutos = $resultCount->fetch_assoc()['total'];
+$totalPages = ceil($totalProdutos / $itemsPerPage);
+
+// Consulta principal com paginação
+$sql = "SELECT p.*, c.nome AS cat_nome FROM produtos p 
+        LEFT JOIN categorias c ON p.categoria_id = c.categoria_id
+        LIMIT $offset, $itemsPerPage";
 $result = $conn->query($sql);
 ?>
 
@@ -108,6 +122,27 @@ $result = $conn->query($sql);
               </tbody>
             </table>
           </div>
+
+          <!-- Paginação -->
+          <?php if ($totalProdutos > $itemsPerPage): ?>
+            <nav aria-label="Navegação de páginas">
+              <ul class="pagination justify-content-center">
+                <li class="page-item <?= ($page <= 1) ? 'disabled' : '' ?>">
+                  <a class="page-link" href="?page=<?= max($page - 1, 1) ?>" tabindex="-1">Anterior</a>
+                </li>
+
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                  <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
+                    <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                  </li>
+                <?php endfor; ?>
+
+                <li class="page-item <?= ($page >= $totalPages) ? 'disabled' : '' ?>">
+                  <a class="page-link" href="?page=<?= min($page + 1, $totalPages) ?>">Próxima</a>
+                </li>
+              </ul>
+            </nav>
+          <?php endif; ?>
 
         </div>
       </div>
