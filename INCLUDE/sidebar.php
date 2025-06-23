@@ -1,8 +1,12 @@
+
 <?php
 
 $current = basename($_SERVER['SCRIPT_NAME']);
 function isActive(string $page, string $current): string {
     return $page === $current ? 'active' : '';
+}
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
 }
 ?>
 
@@ -63,11 +67,13 @@ function isActive(string $page, string $current): string {
 
     <div class="sidebar-footer mt-auto p-3">
       <div class="d-flex justify-content-between align-items-center mb-3">
-        <span class="text-white" id="user-name">Administrador</span>
+        <span class="text-white" id="user-name">
+        <?php echo htmlspecialchars($_SESSION['usuario_nome'] ?? 'Administrador'); ?>
+        </span>
       </div>
-      <button id="logout-btn" class="btn btn-outline-light w-100" onclick="location.href='login.php'">
-        <i class="bi bi-box-arrow-right me-2"></i>
-        Sair
+      <a href="logout.php" class="btn btn-outline-light w-100">
+         <i class="bi bi-box-arrow-right me-2"></i> Sair
+      </a>
       </button>
     </div>
   </div>
