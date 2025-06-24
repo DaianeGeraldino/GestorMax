@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
     exit;
 }
 
-// Configuração da paginação
+// Configuração da paginaçãoAdd commentMore actions
 $itemsPerPage = 7; // Itens por página
 $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1; // Página atual
 $offset = ($page - 1) * $itemsPerPage; // Cálculo do offset
@@ -35,9 +35,8 @@ $totalPages = ceil($totalProdutos / $itemsPerPage);
 
 // Consulta principal com paginação
 $sql = "SELECT p.*, c.nome AS cat_nome FROM produtos p 
-        LEFT JOIN categorias c ON p.categoria_id = c.categoria_id
+        LEFT JOIN categorias c ON p.categoria_id = c.categoria_idAdd commentMore actions
         LIMIT $offset, $itemsPerPage";
-$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +59,7 @@ $result = $conn->query($sql);
 
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Lista de Produtos</h1>
-        <a href="criar-produto.php" class="btn btn-primary">
+        <a href="produtos-cadastro.php" class="btn btn-primary">
           <i class="bi bi-plus-circle me-1"></i> Novo Produto
         </a>
       </div>
@@ -122,27 +121,6 @@ $result = $conn->query($sql);
               </tbody>
             </table>
           </div>
-
-          <!-- Paginação -->
-          <?php if ($totalProdutos > $itemsPerPage): ?>
-            <nav aria-label="Navegação de páginas">
-              <ul class="pagination justify-content-center">
-                <li class="page-item <?= ($page <= 1) ? 'disabled' : '' ?>">
-                  <a class="page-link" href="?page=<?= max($page - 1, 1) ?>" tabindex="-1">Anterior</a>
-                </li>
-
-                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                  <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
-                    <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
-                  </li>
-                <?php endfor; ?>
-
-                <li class="page-item <?= ($page >= $totalPages) ? 'disabled' : '' ?>">
-                  <a class="page-link" href="?page=<?= min($page + 1, $totalPages) ?>">Próxima</a>
-                </li>
-              </ul>
-            </nav>
-          <?php endif; ?>
 
         </div>
       </div>
