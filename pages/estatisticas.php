@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>GESTORMAX - Estatísticas</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="styles/estatisticas.css">
-  <link rel="stylesheet" href="../styles/sidebar.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="../styles/estatisticas.css" />
+  <link rel="stylesheet" href="../styles/sidebar.css" />
 </head>
+
 <body>
   <div class="container-fluid">
     <div class="row">
@@ -17,29 +19,34 @@
 
       <!-- Main content -->
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <div
+          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2">Estatísticas</h1>
         </div>
 
         <!-- Tabs -->
         <ul class="nav nav-tabs mb-4" id="estatisticasTab" role="tablist">
           <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="visao-geral-tab" data-bs-toggle="tab" data-bs-target="#visao-geral" type="button" role="tab">
+            <button class="nav-link active" id="visao-geral-tab" data-bs-toggle="tab" data-bs-target="#visao-geral"
+              type="button" role="tab" aria-controls="visao-geral" aria-selected="true">
               Visão Geral
             </button>
           </li>
           <li class="nav-item" role="presentation">
-            <button class="nav-link" id="categorias-tab" data-bs-toggle="tab" data-bs-target="#categorias" type="button" role="tab">
+            <button class="nav-link" id="categorias-tab" data-bs-toggle="tab" data-bs-target="#categorias" type="button"
+              role="tab" aria-controls="categorias" aria-selected="false">
               Categorias
             </button>
           </li>
           <li class="nav-item" role="presentation">
-            <button class="nav-link" id="financeiro-tab" data-bs-toggle="tab" data-bs-target="#financeiro" type="button" role="tab">
+            <button class="nav-link" id="financeiro-tab" data-bs-toggle="tab" data-bs-target="#financeiro" type="button"
+              role="tab" aria-controls="financeiro" aria-selected="false">
               Financeiro
             </button>
           </li>
           <li class="nav-item" role="presentation">
-            <button class="nav-link" id="estoque-tab" data-bs-toggle="tab" data-bs-target="#estoque" type="button" role="tab">
+            <button class="nav-link" id="estoque-tab" data-bs-toggle="tab" data-bs-target="#estoque" type="button"
+              role="tab" aria-controls="estoque" aria-selected="false">
               Estoque
             </button>
           </li>
@@ -47,7 +54,7 @@
 
         <div class="tab-content" id="estatisticasTabContent">
           <!-- Visão Geral -->
-          <div class="tab-pane fade show active" id="visao-geral" role="tabpanel">
+          <div class="tab-pane fade show active" id="visao-geral" role="tabpanel" aria-labelledby="visao-geral-tab">
             <div class="row mb-4">
               <div class="col-sm-6 col-lg-3 mb-3">
                 <div class="card stat-card h-100">
@@ -84,35 +91,35 @@
             </div>
 
             <div class="row">
-              <div class="col-lg-6 mb-4">
-                <div class="card h-100">
-                  <div class="card-body">
+              <div class="col-lg-6 mb-4 d-flex">
+                <div class="card flex-fill">
+                  <div class="card-body d-flex flex-column">
                     <h2 class="h5 card-title text-center">Produtos por Categoria</h2>
-                    <div class="chart-wrapper">
+                    <div class="chart-wrapper flex-fill">
                       <canvas id="chart-categorias"></canvas>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-6 mb-4">
-                <div class="card h-100">
-                  <div class="card-body">
+              <div class="col-lg-6 mb-4 d-flex">
+                <div class="card flex-fill">
+                  <div class="card-body d-flex flex-column">
                     <h2 class="h5 card-title text-center">Distribuição de Valor por Categoria</h2>
-                    <div class="chart-wrapper">
+                    <div class="chart-pie-wrapper">
                       <canvas id="chart-valor-categorias"></canvas>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </div> <!-- Fim Visão Geral -->
 
           <!-- Categorias -->
-          <div class="tab-pane fade" id="categorias" role="tabpanel">
+          <div class="tab-pane fade" id="categorias" role="tabpanel" aria-labelledby="categorias-tab">
             <div class="card mb-4">
               <div class="card-body">
                 <h2 class="h5 card-title text-center">Distribuição por Categoria</h2>
-                <div class="chart-wrapper">
+                <div class="chart-wrapper-pequeno">
                   <canvas id="chart-categorias-detalhado"></canvas>
                 </div>
               </div>
@@ -143,10 +150,10 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> <!-- Fim Categorias -->
 
           <!-- Financeiro -->
-          <div class="tab-pane fade" id="financeiro" role="tabpanel">
+          <div class="tab-pane fade" id="financeiro" role="tabpanel" aria-labelledby="financeiro-tab">
             <div class="row mb-4">
               <div class="col-sm-6 col-lg-3 mb-3">
                 <div class="card stat-card h-100">
@@ -185,7 +192,7 @@
             <div class="card mb-4">
               <div class="card-body">
                 <h2 class="h5 card-title text-center">Margem de Lucro por Categoria</h2>
-                <div class="chart-wrapper">
+                <div class="chart-wrapper-pequeno">
                   <canvas id="chart-margem-lucro"></canvas>
                 </div>
               </div>
@@ -217,14 +224,14 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> <!-- Fim Financeiro -->
 
           <!-- Estoque -->
-          <div class="tab-pane fade" id="estoque" role="tabpanel">
+          <div class="tab-pane fade" id="estoque" role="tabpanel" aria-labelledby="estoque-tab">
             <div class="card mb-4">
               <div class="card-body">
                 <h2 class="h5 card-title text-center">Distribuição de Estoque</h2>
-                <div class="chart-wrapper">
+                <div class="chart-wrapper-pequeno">
                   <canvas id="chart-estoque"></canvas>
                 </div>
               </div>
@@ -255,14 +262,15 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </div> <!-- Fim Estoque -->
+        </div> <!-- Fim tab-content -->
       </main>
     </div>
   </div>
-  
+
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="../js/estatisticas.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
