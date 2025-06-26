@@ -1,0 +1,23 @@
+.chart-pie-wrapper {
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+    padding: 10px;
+  }
+  
+  .chart-pie-wrapper canvas {
+    width: 100% !important;
+    height: auto !important;
+  }
+  
+  .chart-wrapper-pequeno {
+    max-width: 800px; /* largura menor */
+    max-height: 500px; /* altura menor */
+    margin: 0 auto; /* centralizar horizontalmente */
+  }
+
+  .chart-wrapper-pequeno canvas {
+    width: 100% !important;  /* canvas ocupa todo o container */
+    height: auto !important;
+  }
