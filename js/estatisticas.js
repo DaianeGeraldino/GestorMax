@@ -105,12 +105,16 @@ function renderizarGraficos(dados) {
     },
     options: {
       responsive: true,
+      maintainAspectRatio: false, // <- isso é crucial para ocupar o espaço
       plugins: {
         legend: { display: false },
         tooltip: { mode: 'index', intersect: false }
       },
       scales: {
-        y: { beginAtZero: true }
+        y: {
+          beginAtZero: true,
+          ticks: { stepSize: 1 }
+        }
       }
     }
   });
@@ -130,11 +134,21 @@ function renderizarGraficos(dados) {
     },
     options: {
       responsive: true,
+      maintainAspectRatio: true,
       plugins: {
-        legend: { position: "bottom" }
+        legend: {
+          position: "bottom",
+          labels: {
+            padding: 12,
+            font: {
+              size: 12
+            }
+          }
+        }
       }
     }
   });
+  
 
   new Chart(document.getElementById("chart-categorias-detalhado"), {
     type: "bar",
