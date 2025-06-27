@@ -5,8 +5,10 @@ document.addEventListener('DOMContentLoaded', function() {
   
     let venda = [];
   
-    document.getElementById('btn-buscar-produto').addEventListener('click', function() {
-      const termo = document.getElementById('busca-produto-venda').value;
+    document.getElementById('btn-buscar-produto').addEventListener('click', function () {
+      const busca = document.getElementById('busca-produto-venda').value;
+      window.location.href = '?busca=' + encodeURIComponent(busca);
+    });
 
       fetch('buscar_produtos.php?termo=' + encodeURIComponent(termo))
         .then(response => response.json())
@@ -73,5 +75,21 @@ document.addEventListener('DOMContentLoaded', function() {
         venda = [];
         atualizarResumo();
       }
+    })
+    
+    document.getElementById('btn-finalizar-venda').addEventListener('click', function () {
+      const form = document.querySelector('form');
+      form.submit();
+    })
+
+    document.getElementById('btn-finalizar-venda').addEventListener('click', function (e) {
+      const selecionados = document.querySelectorAll('input[name="selecionados[]"]:checked');
+      if (selecionados.length === 0) {
+        alert('Selecione pelo menos um produto para finalizar a venda!');
+        return;
+      }
+      document.querySelector('form').submit();
     });
-  });
+    ;
+  
+
