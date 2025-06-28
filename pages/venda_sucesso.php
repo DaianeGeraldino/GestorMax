@@ -8,7 +8,7 @@ if ($venda_id <= 0) {
 
 // Buscar dados da venda
 $stmt = $conn->prepare("
-    SELECT data_venda, total
+    SELECT data_venda
     FROM vendas
     WHERE venda_id = ?
 ");
