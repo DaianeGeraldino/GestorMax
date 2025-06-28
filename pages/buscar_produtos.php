@@ -3,7 +3,7 @@ include 'conexao.php';  // Conexão com o banco
 
 $termo = $_GET['termo'] ?? '';
 
-$sql = "SELECT id, nome, estoque, preco FROM produtos WHERE nome LIKE ?";
+$sql = "SELECT id, nome, quantidade_inicial, valor_venda FROM produtos WHERE nome LIKE ?";
 $stmt = $conn->prepare($sql);
 $busca = '%' . $termo . '%';
 $stmt->bind_param('s', $busca);
@@ -18,4 +18,3 @@ while ($row = $result->fetch_assoc()) {
 
 header('Content-Type: application/json');
 echo json_encode($produtos);
-?>
