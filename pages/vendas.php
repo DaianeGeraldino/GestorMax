@@ -41,6 +41,22 @@ $result = $conn->query($sql);
 
         <div id="mensagem-container"></div>
 
+        <!-- Form de busca -->
+        <form method="GET" class="input-group mb-3" action="">
+          <input
+            type="text"
+            id="busca-produto-venda"
+            name="busca"
+            class="form-control"
+            placeholder="Buscar produto..."
+            value="<?= htmlspecialchars($busca) ?>"
+            autocomplete="off"
+          />
+          <button class="btn btn-outline-secondary" type="submit" id="btn-buscar-produto">
+            <i class="bi bi-search"></i>
+          </button>
+        </form>
+
         <form method="POST" action="processar_venda.php">
           <div class="row">
             <div class="col-lg-8">
@@ -49,13 +65,6 @@ $result = $conn->query($sql);
                   <h2 class="h5 card-title mb-1">Adicionar Produtos</h2>
                 </div>
                 <div class="card-body">
-                  <div class="input-group mb-3">
-                    <input type="text" id="busca-produto-venda" class="form-control" placeholder="Buscar produto...">
-                    <button class="btn btn-outline-secondary" type="button" id="btn-buscar-produto">
-                      <i class="bi bi-search"></i>
-                    </button>
-                  </div>
-
                   <div class="table-responsive">
                     <table class="table table-hover">
                       <thead>
@@ -70,15 +79,17 @@ $result = $conn->query($sql);
                       </thead>
                       <tbody id="lista-produtos-venda">
                         <?php
-                        if ($result->num_rows > 0) {
+                        if ($result && $result->num_rows > 0) {
                           while ($row = $result->fetch_assoc()) {
+                            $produto_id = intval($row['id']);
+                            $estoque = intval($row['quantidade_inicial']);
                             echo "<tr>";
                             echo "<td>" . htmlspecialchars($row['nome']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['cat_nome'] ?? 'Sem categoria') . "</td>";
-                            echo "<td>" . intval($row['quantidade_inicial']) . "</td>";
-                            echo "<td><input type='number' name='quantidade[" . intval($row['id']) . "]' min='0' max='" . intval($row['quantidade_inicial']) . "' value='0' class='form-control' style='width:80px;' /></td>";
+                            echo "<td>" . $estoque . "</td>";
+                            echo "<td><input type='number' name='quantidade[$produto_id]' min='0' max='$estoque' value='0' class='form-control' style='width:80px;' /></td>";
                             echo "<td>R$ " . number_format($row['valor_venda'], 2, ',', '.') . "</td>";
-                            echo "<td><input type='checkbox' name='selecionados[]' value='" . intval($row['id']) . "'></td>";
+                            echo "<td><input type='checkbox' name='selecionados[]' value='$produto_id'></td>";
                             echo "</tr>";
                           }
                         } else {
@@ -100,7 +111,13 @@ $result = $conn->query($sql);
                 <div class="card-body">
                   <div class="mb-3">
                     <label for="cliente" class="form-label">Cliente</label>
-                    <input type="text" class="form-control" id="cliente" name="cliente" placeholder="Nome do cliente (opcional)" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="cliente"
+                      name="cliente"
+                      placeholder="Nome do cliente (opcional)"
+                    />
                   </div>
 
                   <div class="table-responsive mb-3">
