@@ -34,8 +34,8 @@ try {
     }
 
     // Inserir venda
-    $stmt = $conn->prepare("INSERT INTO vendas (data_venda, usuario_id, total) VALUES (CURDATE(), ?, ?)");
-    $stmt->bind_param("id", $usuario_id, $total_venda);
+    $stmt = $conn->prepare("INSERT INTO vendas (data_venda, usuario_id) VALUES (CURDATE(), ?)");
+    $stmt->bind_param("i", $usuario_id);
     $stmt->execute();
 
     $venda_id = $stmt->insert_id;
